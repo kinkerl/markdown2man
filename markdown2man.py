@@ -40,6 +40,7 @@ def main(argv):
 	parser = OptionParser(usage = "use --help to get more information")
 	parser.add_option("--infilename", dest="infilename", default="", help="filename of the markdown file")
 	parser.add_option("--outfilename", dest="outfilename", default="", help="filename of the manpage file")
+	parser.add_option("--modifydate", dest="date", default="", help="sets the modification timestamp. default is the current date")
 	
 	(options, args) = parser.parse_args(args)
 
@@ -49,13 +50,17 @@ def main(argv):
 	elif not options.outfilename:
 		print "outfilename missing"
 		sys.exit(1)
+	elif not options.date:
+		from time import strftime
+		options.date = strftime("%b %d, %Y")
+
 	
 	infile  = file(options.infilename)
 	outfile = file(options.outfilename, "w")
 	
 	(first, last) = options.outfilename.split("/")[-1].split(".")
 	
-	outfile.write(".TH %s %s \"Aug 9, 2009\"\n"%(first, last))
+	outfile.write(".TH %s %s \"%s\"\n"%(first, last, options.date))
 	
 
 	prevline = ""
@@ -70,6 +75,20 @@ def main(argv):
 		if line.startswith("---"):
 			line = ".RS\n"
 			insup = True
+		bolds = line.split("__")
+		if len(bolds) > 1:
+			newline = ''
+			i = 0
+			while i < len(bolds):
+				if bolds[i][0] == " ":
+					newline += bolds[i][1:]
+				else:
+					newline += bolds[i]
+				if (i + 1) < len(bolds):
+					newline += "\n.B " + bolds[i+1]+"\n"
+				i += 2
+			line = newline
+
 		outfile.write(prevline)
 		prevline = line
 
