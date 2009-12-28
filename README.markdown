@@ -12,6 +12,8 @@ Usage
 ============
 see markdown2man --help for more information about the usage
 
+To create a propper manpage out of a markdown formated file, the first heading(=====)  must be special. the first heading should be "Name" with only the name of the project as the content for the heading.
+
 Author
 ============
 Copyright (C) 2009 Dennis Schwertel <s@digitalkultur.net>
