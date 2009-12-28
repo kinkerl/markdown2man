@@ -3,12 +3,14 @@ Name
 markdown2man
 
 Description
-===========
+============
 converts a markdown formated page to a manpage formating. this is by far NOT a 1 to 1 formatconversion. this is mostly a quick way to update a manpage if you are to lazy to update the existing one. 
+It will transfrom ===== headings to .RE, ----- headings to .SH and tries to transfrom ___ to bold manpage markup with .B
+
 
 Usage
-===========
-see markdown2man --help for more information about the usage#
+============
+see markdown2man --help for more information about the usage
 
 Author
 ============
