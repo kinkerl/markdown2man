@@ -50,6 +50,7 @@ def main(argv):
 	elif not options.outfilename:
 		print "outfilename missing"
 		sys.exit(1)
+	#if date not set, set the date to right now	
 	elif not options.date:
 		from time import strftime
 		options.date = strftime("%b %d, %Y")
@@ -60,21 +61,26 @@ def main(argv):
 	
 	(first, last) = options.outfilename.split("/")[-1].split(".")
 	
-	outfile.write(".TH %s %s \"%s\"\n"%(first, last, options.date))
+	outfile.write(".TH %s %s \"%s\"\n"%(first.upper(), last, options.date))
 	
 
 	prevline = ""
 	insup = False
 	for line in infile.readlines():
+		#close opened RS with an RE before an new heading
 		if (line.startswith("===") or line.startswith("---")) and insup:
 			outfile.write(".RE\n")
 			insup = False	
+		#first heading
 		if line.startswith("==="):
 			prevline = ".SH " + prevline
 			continue
+		#second heading is done with an RS
 		if line.startswith("---"):
 			line = ".RS\n"
 			insup = True
+
+		#create formating for bold words
 		bolds = line.split("__")
 		if len(bolds) > 1:
 			newline = ''
@@ -88,7 +94,8 @@ def main(argv):
 					newline += "\n.B " + bolds[i+1]+"\n"
 				i += 2
 			line = newline
-
+		
+		#print the last line in cache
 		outfile.write(prevline)
 		prevline = line
 
