@@ -9,6 +9,9 @@ It will transfrom ===== headings to .RE, ----- headings to .SH and tries to tran
 
 this is more or less a proof of concept. if you know a better way (or project) to do this stuff, feel free to write me.
 
+Here is a small graphic to illustrate the process:
+
+![illustration](http://cloud.github.com/downloads/kinkerl/markdown2man/illustration.png)
 
 Usage
 ============
