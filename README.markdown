@@ -19,7 +19,7 @@ see markdown2man --help for more information about the usage
 
 To create a propper manpage out of a markdown formated file, the first heading(=====)  must be special. the first heading should be "Name" with only the name of the project as the content for the heading.
 
-The outfilename should be in the following format: <projectname>.<sectionnumber> 
+The outfilename should be in the following format: projectname.sectionnumber 
 The sectionnumber depends on your project. If you dont know what to take, take 1. This is the section for general commands. As an example, the ouffilename for this project would be "markdown2man.1".
 
 
