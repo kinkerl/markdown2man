@@ -4,6 +4,8 @@ markdown2man
 
 Description
 ============
+__you might want to take a look at pandoc. it does basically the same and is more mature (but its bigger in size). this little script is unsupported and is here only for future reference__
+
 converts a markdown formated page to a manpage formating. this is by far NOT a 1 to 1 formatconversion. this is mostly a quick way to update a manpage if you are to lazy to update the existing one. 
 It will transfrom ===== headings to .RE, ----- headings to .SH and tries to transfrom a word surrounden with two _ , into bold manpage markup with .B
 
